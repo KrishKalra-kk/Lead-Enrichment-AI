@@ -1,0 +1,52 @@
+===================================================
+FRONTEND DEPLOYMENT (Vercel)
+===================================================
+Platform: Vercel
+Framework Preset: Next.js
+Root Directory: frontend
+
+Build Settings:
+- Build Command: npm run build
+- Install Command: npm install
+- Output Directory: .next
+
+Environment Variables (Add these in Vercel settings):
+- NEXT_PUBLIC_API_URL: <URL of your Render backend> (e.g. https://your-backend-name.onrender.com)
+
+
+===================================================
+BACKEND DEPLOYMENT (Render)
+===================================================
+Platform: Render
+Service Type: Web Service (Node.js)
+Root Directory: backend
+
+Build Settings:
+- Build Command: npm install --include=dev && npm run build && npx playwright install chromium && npx puppeteer browsers install chrome
+- Start Command: npm start
+
+Environment Variables (Add these in Render settings):
+- PLAYWRIGHT_BROWSERS_PATH: 0
+- PUPPETEER_CACHE_DIR: /opt/render/project/src/backend/.cache
+- NODE_ENV: production
+- FRONTEND_URL: <URL of your Vercel frontend> (e.g. https://your-frontend-name.vercel.app)
+- PORT: 5000 (Render typically overrides this automatically, but explicitly defining it is fine)
+
+# Third-party APIs
+- GROQ_API_KEY: <Your Groq API Key>
+- GEMINI_API_KEY: <Your Gemini API Key> (Optional, since you defaulted to Groq)
+
+# SMTP Config (For sending finalized reports)
+- SMTP_HOST: <smtp.gmail.com or your preferred host>
+- SMTP_PORT: 465
+- SMTP_SECURE: true
+- SMTP_USER: <Your email address>
+- SMTP_PASSWORD: <Your app password>
+- EMAIL_FROM: <Your email address>
+- EMAIL_FROM_NAME: Simplifi-IQ Assessment
+
+# Google Workspace / Spreadsheets Config (If enabled)
+- ENABLE_GOOGLE_INTEGRATIONS: true/false
+- GOOGLE_SHEETS_CREDENTIALS: <JSON string of your Google Service Account credentials>
+- GOOGLE_SHEETS_SPREADSHEET_ID: <Your Google Sheet ID>
+- GOOGLE_DRIVE_FOLDER_ID: <Your Google Drive Folder ID>
